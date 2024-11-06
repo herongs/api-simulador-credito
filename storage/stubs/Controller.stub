@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Services\{{modelName}}Service;
+use App\Http\Requests\{{modelName}}Request;
+use App\Http\Resources\{{modelName}}Resource;
+use App\Http\Resources\{{modelName}}Collection;
+use App\DataTransferObjects\{{modelName}}Dto;
+use Illuminate\Http\JsonResponse;
+
+class {{modelName}}Controller extends Controller
+{
+    public function __construct(
+        protected {{modelName}}Service ${{modelName}}Service,
+    ) {}
+
+    public function index(): JsonResponse
+    {
+        $items = $this->{{modelName}}Service->getAllItems();
+        return $this->successResponse(payload: new {{modelName}}Collection($items));
+    }
+
+    public function store({{modelName}}Request $request): JsonResponse
+    {
+        $item = $this->{{modelName}}Service->createItem({{modelName}}Dto::fromRequest($request));
+        return $this->successResponse(payload: new {{modelName}}Resource($item), message: __('messages.created'), code: 201);
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        $item = $this->{{modelName}}Service->getItem($id);
+        return $this->successResponse(payload: new {{modelName}}Resource($item));
+    }
+
+    public function update({{modelName}}Request $request, int $id): JsonResponse
+    {
+        $item = $this->{{modelName}}Service->updateItem({{modelName}}Dto::fromRequest($request), $id);
+        return $this->successResponse(payload: new {{modelName}}Resource($item), message: __('messages.updated'));
+    }
+
+    public function destroy(int $id): JsonResponse
+    {
+        $this->{{modelName}}Service->deleteItem($id);
+        return $this->successResponse(message: __('messages.deleted'), code: 204);
+    }
+}

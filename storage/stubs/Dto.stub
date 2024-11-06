@@ -1,0 +1,34 @@
+<?php
+
+namespace App\DataTransferObjects;
+
+use App\Http\Requests\{{modelName}}Request;
+
+class {{modelName}}Dto
+{
+    public function __construct(
+        // Add properties here
+    ) {
+    }
+
+    public static function fromRequest({{modelName}}Request $request): self
+    {
+        return new self(
+            // Initialize properties from $request
+        );
+    }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            // Initialize properties from $data
+        );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            // Convert properties to array
+        ];
+    }
+}
