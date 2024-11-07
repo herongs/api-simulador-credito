@@ -11,6 +11,7 @@ class SimulationsDto
         public string $loan_amount,
         public int $payment_date,
         public string $birth_date,
+        public ?string $interest_type
     ) {
     }
 
@@ -20,6 +21,7 @@ class SimulationsDto
             loan_amount: $request->input('loan_amount'),
             payment_date: $request->input('payment_date'),
             birth_date: $request->input('birth_date'),
+            interest_type: $request->input('interest_type'),
         );
     }
 
@@ -31,6 +33,7 @@ class SimulationsDto
             'loan_amount' => $this->loan_amount,
             'payment_date' => $this->payment_date,
             'birth_date' => $this->birth_date,
+            'interest_type' => $this->interest_type,
         ], fn($value) => !is_null($value));
     }
 }

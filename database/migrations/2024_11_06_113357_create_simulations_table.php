@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('payment_date');
             $table->date('birth_date');
             $table->decimal('interest_rate', 5, 2);
-            $table->enum('interest_type', ['FIXED', 'VARIABLE']);
+            $table->enum('interest_type', ['FIXA', 'VARIAVEL']);
             $table->decimal('total_amount', 15, 2);
             $table->decimal('total_payment', 15, 2);
             $table->decimal('monthly_payment', 15, 2);

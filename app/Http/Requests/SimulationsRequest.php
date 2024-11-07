@@ -9,7 +9,10 @@ class SimulationsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // Define validation rules here
+            'loan_amount' => 'required|numeric',
+            'payment_date' => 'required|integer',
+            'birth_date' => 'required|date',
+            'interest_type' => 'string',
         ];
     }
 }
