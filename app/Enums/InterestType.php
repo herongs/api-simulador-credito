@@ -4,9 +4,10 @@ namespace App\Enums;
 
 use App\Traits\EnumHelper;
 
-enum UserTypeSource: string
+enum InterestType: string
 {
     use EnumHelper;
 
-    case Admin = 'admin';
+    case Fixa = 'FIXA';
+    case Variavel = 'VARIAVEL';
 }

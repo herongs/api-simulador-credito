@@ -9,6 +9,12 @@ use App\Repositories\PermissionRepository;
 use App\Repositories\PermissionRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
+use App\Repositories\ExchangeRatesRepositoryInterface;
+use App\Repositories\ExchangeRatesRepository;
+
+use App\Repositories\InterestRatesRepositoryInterface;
+use App\Repositories\InterestRatesRepository;
+
 use App\Repositories\AgeGroupsRepositoryInterface;
 use App\Repositories\AgeGroupsRepository;
 
@@ -38,6 +44,8 @@ class AppServiceProvider extends ServiceProvider
      * @var array
      */
     public $bindings = [
+        ExchangeRatesRepositoryInterface::class => ExchangeRatesRepository::class,
+        InterestRatesRepositoryInterface::class => InterestRatesRepository::class,
         AgeGroupsRepositoryInterface::class => AgeGroupsRepository::class,
         SimulationsRepositoryInterface::class => SimulationsRepository::class,
         UserRepositoryInterface::class => UserRepository::class,
