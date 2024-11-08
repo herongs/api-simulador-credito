@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('simulations', function (Blueprint $table) {
             $table->id();
+            $table->string('email')->nullable();
             $table->decimal('loan_amount', 15, 2);
             $table->integer('payment_date');
             $table->date('birth_date');
