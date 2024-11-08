@@ -59,15 +59,10 @@ class InterestRatesService
                 rate: $annual_selic,
                 rate_type: 'VARIAVEL',
                 reference: 'SELIC',
-                valid_from: Carbon::parse($latestRate['data'])->format('Y-m-d'),
+                valid_from: Carbon::now()->format('Y-m-d'),
             );
 
-            Log::info('Creating new SELIC rate: ' . json_encode($dto));
-
-            $interestRate = $this->createItem($dto);
-
-            Log::info('Saving new SELIC rate: ' . json_encode($interestRate));
-
+            $this->createItem($dto);
             return $dto;
         } else {
             throw new Exception("Unable to retrieve the SELIC rate.");

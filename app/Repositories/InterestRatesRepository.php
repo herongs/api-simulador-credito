@@ -43,9 +43,7 @@ class InterestRatesRepository implements InterestRatesRepositoryInterface
 
     public function findSelicRateByDate(string $date): ?InterestRates
     {
-        Log::info('Searching for Selic rate for date: ' . $date);
-
-        $formattedDate = date('Y-d-m', strtotime($date));
+        $formattedDate = date('Y-m-d', strtotime($date));
 
         return $this->model->where('reference', 'SELIC')
             ->whereDate('valid_from', '=', $formattedDate)

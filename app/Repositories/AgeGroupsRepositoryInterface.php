@@ -12,7 +12,7 @@ interface AgeGroupsRepositoryInterface
 
     public function find(int $id): AgeGroups;
 
-    public function findByAge(int $age): float;
+    public function findByAge(int $age): ?float;
 
     public function create(AgeGroupsDto $dto): AgeGroups;
 
