@@ -46,4 +46,18 @@ class SimulationsController extends Controller
         return $this->successResponse(payload: new SimulationsResource($item), message: __('messages.created'), code: 201);
     }
 
+    public function storeExchange(SimulationsRequest $request): JsonResponse
+    {
+        $item = $this->SimulationsService->createItemExchange(SimulationsDto::fromRequest($request));
+
+        if (!$item) {
+            return $this->errorResponse(
+                message: __('Não foi possível encontrar a taxa de câmbio para a moeda informada. Tente Novamente!'),
+                code: 404
+            );
+        }
+
+        return $this->successResponse(payload: new SimulationsResource($item), message: __('messages.created'), code: 201);
+    }
+
 }

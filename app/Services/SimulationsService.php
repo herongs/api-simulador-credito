@@ -6,8 +6,8 @@ use App\DataTransferObjects\NewSimulationsDto;
 use App\Repositories\SimulationsRepositoryInterface;
 use App\DataTransferObjects\SimulationsDto;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Collection;
 use App\Mail\SendSimulationMail;
+use App\Mail\SendExchangeSimulationMail;
 use App\Models\Simulations;
 use App\Repositories\AgeGroupsRepositoryInterface;
 use App\Repositories\InterestRatesRepositoryInterface;
@@ -21,37 +21,20 @@ class SimulationsService extends Controller
         protected SimulationsRepositoryInterface $repository,
         protected AgeGroupsRepositoryInterface $ageGroupRepository,
         protected InterestRatesService $InterestRatesService,
-        protected InterestRatesRepositoryInterface $interestRateRepository
+        protected InterestRatesRepositoryInterface $interestRateRepository,
+        protected ExchangeRatesService $ExchangeRatesService,
+
     ) {}
 
     public function createItem(SimulationsDto $dto): ?Simulations
     {
-        $birthDate = Carbon::parse($dto->birth_date);
-        $currentDate = Carbon::now();
-        $age = $currentDate->diff($birthDate)->y;
-
-        if ($dto->interest_type === 'VARIAVEL') {
-            $today = Carbon::now()->format('Y-m-d');
-
-            $selicRate = $this->interestRateRepository->findSelicRateByDate($today);
-
-            if (!$selicRate) {
-                $selicRate = $this->InterestRatesService->getAndSaveCurrentSelicRate();
-            }
-            $annualInterestRate = $selicRate->rate;
-            $monthlyInterestRate = pow(1 + ($annualInterestRate / 100), 1 / 12) - 1;
-            $interestRate = $annualInterestRate;
-        } elseif ($dto->interest_type === 'FIXA' || !$dto->interest_type) {
-            $interestRate = $this->ageGroupRepository->findByAge($age);
-            if (!$interestRate) {
-                return null;
-            }
-            $monthlyInterestRate = $interestRate / 100 / 12;
-        } else {
+        $age = $this->calculateAge($dto->birth_date);
+        $interestData = $this->getInterestData($dto->interest_type, $age);
+        if (!$interestData) {
             return null;
         }
 
-        $monthlyPayment = ($dto->loan_amount * $monthlyInterestRate) / (1 - pow(1 + $monthlyInterestRate, -$dto->payment_date));
+        $monthlyPayment = $this->calculateMonthlyPayment($dto->loan_amount, $interestData['monthlyRate'], $dto->payment_date);
         $totalPayment = $monthlyPayment * $dto->payment_date;
 
         $simulation = $this->repository->create(
@@ -59,17 +42,57 @@ class SimulationsService extends Controller
                 birth_date: $dto->birth_date,
                 loan_amount: $dto->loan_amount,
                 payment_date: $dto->payment_date,
-                interest_rate: $interestRate,
+                interest_rate: $interestData['rate'],
                 interest_type: $dto->interest_type ?? 'FIXA',
                 total_amount: $dto->loan_amount,
                 total_payment: $totalPayment,
                 monthly_payment: $monthlyPayment,
-                total_interest: ($monthlyPayment * $dto->payment_date) - $dto->loan_amount
+                total_interest: $totalPayment - $dto->loan_amount,
+                currency: 'BRL',
             )
         );
 
-        if($dto->email) {
+        if ($dto->email) {
             $this->sendSimulationEmailToUser($simulation, $dto);
+        }
+
+        return $simulation;
+    }
+
+    public function createItemExchange(SimulationsDto $dto): ?Simulations
+    {
+        $exchangeRate = $this->ExchangeRatesService->getExchangeRate($dto->target_currency);
+        if (!$exchangeRate) {
+            $exchangeRate = $this->ExchangeRatesService->getAndSaveCurrentExchangeRate($dto->target_currency);
+        }
+
+        $totalAmount = $dto->loan_amount * $exchangeRate->rate;
+        $age = $this->calculateAge($dto->birth_date);
+        $interestData = $this->getInterestData($dto->interest_type, $age);
+        if (!$interestData) {
+            return null;
+        }
+
+        $monthlyPayment = $this->calculateMonthlyPayment($totalAmount, $interestData['monthlyRate'], $dto->payment_date);
+        $totalPayment = $monthlyPayment * $dto->payment_date;
+
+        $simulation = $this->repository->create(
+            new NewSimulationsDto(
+                birth_date: $dto->birth_date,
+                loan_amount: $totalAmount,
+                payment_date: $dto->payment_date,
+                interest_rate: $interestData['rate'],
+                interest_type: $dto->interest_type ?? 'FIXA',
+                total_amount: $totalAmount,
+                total_payment: $totalPayment,
+                monthly_payment: $monthlyPayment,
+                total_interest: $totalPayment - $totalAmount,
+                currency: $dto->target_currency,
+            )
+        );
+
+        if ($dto->email) {
+            $this->sendExchangeSimulationEmailToUser($simulation, $dto, $exchangeRate);
         }
 
         return $simulation;
@@ -80,4 +103,42 @@ class SimulationsService extends Controller
         Mail::to($dto->email)->send(new SendSimulationMail($simulation));
     }
 
+    private function sendExchangeSimulationEmailToUser(Simulations $simulation, SimulationsDto $dto, $exchangeRate): void
+    {
+        Mail::to($dto->email)->send(new SendExchangeSimulationMail($simulation,  $exchangeRate, $dto));
+    }
+
+    private function calculateAge(string $birthDate): int
+    {
+        $birthDate = Carbon::parse($birthDate);
+        $currentDate = Carbon::now();
+        $age = $currentDate->diff($birthDate)->y;
+        return $age;
+    }
+
+    private function getInterestData(?string $interestType, int $age): ?array
+    {
+        if ($interestType === 'VARIAVEL') {
+            $selicRate = $this->interestRateRepository->findSelicRateByDate(Carbon::now()->format('Y-m-d'));
+            if (!$selicRate) {
+                $selicRate = $this->InterestRatesService->getAndSaveCurrentSelicRate();
+            }
+            $annualInterestRate = $selicRate->rate;
+            $monthlyRate = pow(1 + ($annualInterestRate / 100), 1 / 12) - 1;
+            return ['rate' => $annualInterestRate, 'monthlyRate' => $monthlyRate];
+        } elseif ($interestType === 'FIXA' || !$interestType) {
+            $rate = $this->ageGroupRepository->findByAge($age);
+            if (!$rate) {
+                return null;
+            }
+            $monthlyRate = $rate / 100 / 12;
+            return ['rate' => $rate, 'monthlyRate' => $monthlyRate];
+        }
+        return null;
+    }
+
+    private function calculateMonthlyPayment(float $amount, float $monthlyRate, int $terms): float
+    {
+        return ($amount * $monthlyRate) / (1 - pow(1 + $monthlyRate, -$terms));
+    }
 }
