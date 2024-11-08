@@ -42,7 +42,7 @@ class SendSimulationMail extends Mailable
         Log::info($this->simulation);
 
         return new Content(
-            view: 'emails.send_code_complete_register',
+            view: 'emails.send_simulation_result',
             with: [
                 'simulation' => $this->simulation,
             ]

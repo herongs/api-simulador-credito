@@ -13,6 +13,7 @@ class SimulationsDto
         public string $birth_date,
         public ?string $interest_type,
         public ?string $email,
+        public ?string $target_currency,
     ) {
     }
 
@@ -24,6 +25,7 @@ class SimulationsDto
             birth_date: $request->input('birth_date'),
             interest_type: $request->input('interest_type'),
             email: $request->input('email'),
+            target_currency: $request->input('target_currency'),
         );
     }
 
@@ -37,6 +39,7 @@ class SimulationsDto
             'birth_date' => $this->birth_date,
             'interest_type' => $this->interest_type,
             'email' => $this->email,
+            'target_currency' => $this->target_currency,
         ], fn($value) => !is_null($value));
     }
 }
