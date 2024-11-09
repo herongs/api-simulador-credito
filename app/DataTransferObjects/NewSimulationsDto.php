@@ -17,6 +17,7 @@ class NewSimulationsDto
         public float $total_payment,
         public float $monthly_payment,
         public float $total_interest,
+        public ?string $currency,
     ) {
     }
 
@@ -32,6 +33,7 @@ class NewSimulationsDto
             total_payment: $request->input('total_payment'),
             monthly_payment: $request->input('monthly_payment'),
             total_interest: $request->input('total_interest'),
+            currency: $request->input('currency') ?? 'BRL',
         );
     }
 
@@ -49,6 +51,7 @@ class NewSimulationsDto
             'total_payment' => $this->total_payment,
             'monthly_payment' => $this->monthly_payment,
             'total_interest' => $this->total_interest,
+            'currency' => $this->currency,
         ], fn($value) => !is_null($value));
     }
 }

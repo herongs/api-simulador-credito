@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\AgeGroups;
 use App\DataTransferObjects\AgeGroupsDto;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
 
 class AgeGroupsRepository implements AgeGroupsRepositoryInterface
 {
@@ -22,11 +23,18 @@ class AgeGroupsRepository implements AgeGroupsRepositoryInterface
         return $this->model->find($id);
     }
 
-    public function findByAge(int $age): float
+    public function findByAge(int $age): ?float
     {
-        return $this->model->where('min_age', '<=', $age)
+
+        Log::info('Age: ' . $age);
+
+        $range_interest = $this->model->where('min_age', '<=', $age)
             ->where('max_age', '>=', $age)
-            ->first()->annual_interest_rate;
+            ->first();
+
+        Log::info('Interest Rate: ' . $range_interest);
+
+        return $range_interest ? $range_interest->annual_interest_rate : null;
     }
 
     public function create(AgeGroupsDto $dto): AgeGroups
