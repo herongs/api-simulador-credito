@@ -1,71 +1,65 @@
-<h1 align="center" style="font-weight: bold;">Simulador de Crédito Backend API 💻</h1>
+# Simulador de Crédito Backend API 💻
 
-<p align="center">
- <a href="#tech">Tecnologias</a> • 
- <a href="#started">Vamos Começar</a> • 
- <a href="#routes">API Endpoints</a> •
-</p>
+<p><strong>API de Backend para simulação de crédito, permitindo aos usuários visualizar as condições de pagamento com base no valor solicitado, taxa de juros e prazo de pagamento.</strong></p>
 
-<p align="center">
-    <b>API de Backend para simulação de crédito, permitindo aos usuários visualizar as condições de pagamento com base no valor solicitado, taxa de juros, e prazo de pagamento.</b>
-</p>
+<hr>
 
 <h2>📐 Estrutura do Projeto e Arquitetura</h2>
 
-<p>Este projeto segue uma estrutura baseada nos princípios <strong>SOLID</strong>, organizando o código em camadas bem definidas para facilitar a manutenção, a escalabilidade. Abaixo estão os principais componentes:</p>
+<p>Este projeto segue os princípios <strong>SOLID</strong> e organiza o código em camadas bem definidas para facilitar a manutenção e escalabilidade. Abaixo, temos os principais componentes:</p>
 
 <ul>
-  <li><strong>Controller</strong>: Responsável por receber as requisições HTTP e encaminhar as operações necessárias para os <em>services</em>.</li>
-  <li><strong>Service</strong>: Contém a lógica de negócios principal e faz a ponte entre o <em>controller</em> e o <em>repository</em>.</li>
-  <li><strong>Repository</strong>: Gerencia a comunicação com o banco de dados, encapsulando consultas e operações de persistência de dados.</li>
-  <li><strong>DTO (Data Transfer Object)</strong>: Utilizado para transferir dados de maneira estruturada e tipada entre camadas.</li>
-  <li><strong>Request</strong>: Define as regras de validação para os dados de entrada, garantindo que apenas dados válidos cheguem aos <em>services</em>.</li>
-  <li><strong>Response</strong>: Formata as respostas de forma consistente antes de serem enviadas para o cliente.</li>
+  <li><strong>Controller</strong>: Recebe as requisições HTTP e delega as operações necessárias para os <strong>services</strong>.</li>
+  <li><strong>Service</strong>: Contém a lógica de negócios principal e faz a interface entre o <strong>controller</strong> e o <strong>repository</strong>.</li>
+  <li><strong>Repository</strong>: Gerencia a comunicação com o banco de dados, encapsulando consultas e operações de persistência.</li>
+  <li><strong>DTO (Data Transfer Object)</strong>: Usado para transferir dados de forma estruturada entre as camadas.</li>
+  <li><strong>Request</strong>: Define regras de validação para garantir que apenas dados válidos sejam processados pelos <strong>services</strong>.</li>
+  <li><strong>Response</strong>: Formata as respostas de forma consistente antes de enviá-las ao cliente.</li>
   <li><strong>Collection</strong>: Facilita a manipulação e formatação de coleções de dados que precisam ser retornadas em listas ou agrupamentos específicos.</li>
 </ul>
 
-<h3>📌 Por que essa estrutura fechada é vantajosa?</h3>
-
-<p>Essa organização modular e orientada aos princípios <strong>SOLID</strong> permite uma série de vantagens, entre elas:</p>
+<p>Essa estrutura proporciona uma série de vantagens, como:</p>
 
 <ul>
-  <li><strong>Facilidade de manutenção</strong>: Com responsabilidades bem definidas em cada camada, é mais simples localizar e corrigir problemas sem afetar outras partes do sistema.</li>
-  <li><strong>Escalabilidade</strong>: A divisão em camadas facilita a expansão do sistema, permitindo adicionar ou modificar funcionalidades de forma independente.</li>
-  <li><strong>Modularidade</strong>: Cada camada executa uma função específica, o que promove a reutilização de código e facilita a implementação de testes unitários isolados.</li>
-  <li><strong>Segurança e consistência</strong>: O uso de <em>DTO</em>, <em>Request</em>, e <em>Response</em> ajuda a validar e estruturar os dados, reduzindo a chance de inconsistências e aumentando a segurança dos dados transferidos.</li>
+  <li><strong>Facilidade de manutenção</strong>: Com responsabilidades bem definidas, é simples corrigir problemas sem afetar outras partes do sistema.</li>
+  <li><strong>Escalabilidade</strong>: Permite adicionar ou modificar funcionalidades de forma independente.</li>
+  <li><strong>Modularidade</strong>: Promove a reutilização de código e facilita a implementação de testes unitários isolados.</li>
+  <li><strong>Segurança e Consistência</strong>: Uso de DTO, Request e Response para garantir a validação e estruturação adequadas dos dados.</li>
 </ul>
 
-<p>Essa abordagem orientada aos princípios SOLID resulta em um sistema mais robusto e preparado para crescer com novas demandas e requisitos, mantendo o código limpo e fácil de entender.</p>
+<hr>
 
-<h2 id="technologies">💻 Tecnologias</h2>
+<h2>💻 Tecnologias</h2>
 
 <ul>
-  <li>PHP</li>
-  <li>Laravel</li>
-  <li>POSTGRESQL</li>
+  <li><strong>PHP</strong></li>
+  <li><strong>Laravel</strong></li>
+  <li><strong>PostgreSQL</strong></li>
 </ul>
 
-<h2 id="started">🚀 Vamos Começar</h2>
+<hr>
+
+<h2>🚀 Vamos Começar</h2>
 
 <h3>Pré-requisitos</h3>
 
+<p>Certifique-se de ter as seguintes ferramentas instaladas:</p>
+
 <ul>
-  <li>PHP 8+</li>
-  <li>Composer</li>
-  <li>MySQL</li>
+  <li><strong>PHP 8+</strong></li>
+  <li><strong>Composer</strong></li>
+  <li><strong>MySQL</strong></li>
 </ul>
 
-<h3>Clone</h3>
-
-<pre><code>git clone https://github.com/herongs/api-simulador-credito.git</code></pre>
-
-<h3>Configuração do Projeto</h3>
+<h3>Como configurar o projeto</h3>
 
 <ol>
+  <li>Clone o repositório:</li>
+  <pre><code>git clone https://github.com/herongs/api-simulador-credito.git</code></pre>
+  
   <li>Copie o arquivo <code>.env.example</code> para <code>.env</code> e configure as variáveis de ambiente:</li>
-</ol>
-
-<pre><code>DB_HOST=127.0.0.1
+  <pre><code>
+DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=nome_do_banco
 DB_USERNAME=seu_usuario
@@ -74,82 +68,155 @@ MAIL_HOST=smtp.seuprovedor.com
 MAIL_PORT=587
 MAIL_USERNAME=seu_email
 MAIL_PASSWORD=sua_senha
-</code></pre>
-
-<ol start="2">
+  </code></pre>
+  
   <li>Instale as dependências do projeto:</li>
-</ol>
-
-<pre><code>composer install</code></pre>
-
-<ol start="3">
+  <pre><code>composer install</code></pre>
+  
   <li>Gere a chave da aplicação Laravel:</li>
-</ol>
-
-<pre><code>php artisan key:generate</code></pre>
-
-<ol start="4">
-  <li>Execute as migrações para criar as tabelas necessárias no banco de dados:</li>
-</ol>
-
-<pre><code>php artisan migrate</code></pre>
-
-<ol start="5">
-  <li>Execute o seeder para popular o banco de dados:</li>
-</ol>
-
-<pre><code>php artisan db:seed</code></pre>
-
-<ol start="6">
+  <pre><code>php artisan key:generate</code></pre>
+  
+  <li>Execute as migrações para criar as tabelas no banco de dados:</li>
+  <pre><code>php artisan migrate</code></pre>
+  
+  <li>Popule o banco de dados com os dados iniciais:</li>
+  <pre><code>php artisan db:seed</code></pre>
+  
   <li>Inicie o servidor:</li>
+  <pre><code>php artisan serve</code></pre>
 </ol>
 
-<pre><code>php artisan serve</code></pre>
+<hr>
 
-<h2 id="routes">📍 API Endpoints</h2>
+<h2>📍 API Endpoints</h2>
 
-<table>
-  <tr>
-    <th>Rota</th>
-    <th>Descrição</th>
-  </tr>
-  <tr>
-    <td><kbd>POST /simulacao-credito</kbd></td>
-    <td>Responsável por criar uma simulação de crédito com os dados do usuário e retornar o valor total, parcelas, e juros totais. <a href="#post-simular-detail">[request details]</a></td>
-  </tr>
-</table>
+<h3>📌 POST /simulacao-credito</h3>
 
-<h3 id="post-simular-detail">POST /simular</h3>
+<p>Cria uma simulação de crédito com os dados do usuário e retorna o valor total, parcelas e juros totais.</p>
 
-<p><strong>REQUEST</strong></p>
-
-<pre><code>{
- "valor_emprestimo": 5000,
- "data_nascimento": "1980-01-01",
- "prazo_meses": 24,
- "taxa_variavel": 0.03, // opcional
- "email": "usuario@example.com" // opcional
+<h4>Exemplo de requisição:</h4>
+<pre><code>
+{
+  "loan_amount": 5000,
+  "payment_date": 24,
+  "birth_date": "1980-01-01"
 }
 </code></pre>
 
-<p><strong>RESPONSE</strong></p>
-
-<pre><code>{
- "valor_total": 5600,
- "valor_parcelas": 233.33,
- "total_juros": 600
+<h4>Resposta:</h4>
+<pre><code>
+{
+  "total_payment": 5104.83,
+  "monthly_payment": 212.70,
+  "total_interest": 104.83
 }
 </code></pre>
+
+<h4>Exemplo com tipo de juros variável:</h4>
+<pre><code>
+{
+  "loan_amount": 5000,
+  "payment_date": 24,
+  "birth_date": "1980-01-01",
+  "interest_type": "VARIAVEL"
+}
+</code></pre>
+
+<h4>Resposta:</h4>
+<pre><code>
+{
+  "total_payment": 5571.66,
+  "monthly_payment": 232.15,
+  "total_interest": 571.66
+}
+</code></pre>
+
+<h4>Exemplo com envio de email:</h4>
+<pre><code>
+{
+  "loan_amount": 5000,
+  "payment_date": 24,
+  "birth_date": "1980-01-01",
+  "interest_type": "VARIAVEL",
+  "email": "teste@email.com"
+}
+</code></pre>
+
+<h4>Resposta:</h4>
+<pre><code>
+{
+  "total_payment": 5571.66,
+  "monthly_payment": 232.15,
+  "total_interest": 571.66
+}
+</code></pre>
+
+<h3>📌 POST /simulacao-credito-cambio</h3>
+
+<p>Cria uma simulação de crédito com os dados do usuário, retornando o valor total, parcelas e juros totais com a conversão da moeda.</p>
+
+<h4>Exemplo de requisição:</h4>
+<pre><code>
+{
+  "loan_amount": 5000,
+  "payment_date": 24,
+  "birth_date": "1980-01-01",
+  "target_currency": "USD"
+}
+</code></pre>
+
+<h4>Resposta:</h4>
+<pre><code>
+{
+  "total_payment": 889.26,
+  "monthly_payment": 31.05,
+  "total_interest": 18.26
+}
+</code></pre>
+
+<hr>
 
 <h2>📑 Documentação de Cálculo</h2>
 
-<p>O cálculo das parcelas fixas segue a fórmula PMT de amortização:</p>
+<p>A simulação de crédito utiliza a fórmula de <strong>amortização PMT</strong> para calcular o valor das parcelas fixas:</p>
+
 <ul>
   <li><strong>PMT</strong>: Pagamento mensal</li>
   <li><strong>PV</strong>: Valor presente (empréstimo)</li>
   <li><strong>r</strong>: Taxa de juros mensal (taxa anual / 12)</li>
   <li><strong>n</strong>: Número total de pagamentos (em meses)</li>
 </ul>
+
+<h3>Faixa de Juros</h3>
+
+<p>A simulação considera duas taxas de juros:</p>
+
+<ul>
+  <li><strong>Taxa fixa</strong>, baseada na faixa etária do cliente:
+    <ul>
+      <li>Ate 25 anos: 5% ao ano</li>
+      <li>De 26 a 40 anos: 3% ao ano</li>
+      <li>De 41 a 60 anos: 2% ao ano</li>
+      <li>Acima de 60 anos: 4% ao ano</li>
+    </ul>
+  </li>
+  <li><strong>Taxa variável</strong>, baseada na taxa Selic vigente, permitindo ajustes conforme as condições econômicas.</li>
+</ul>
+
+<h3>Conversão de Moeda</h3>
+
+<p>O sistema também permite a conversão do valor do empréstimo para outras moedas, como o dólar (USD). Ao informar a sigla da moeda desejada, o sistema converte o valor do empréstimo para a moeda selecionada, ajustando a simulação conforme a taxa de câmbio atual.</p>
+
+<hr>
+
+<h2>📧 Exemplo de Email de Confirmação</h2>
+
+<p>Caso o usuário forneça um email na requisição, um email de confirmação será enviado com os detalhes da simulação. As imagens a seguir ilustram as duas opções possíveis de simulação:</p>
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="assets/Simulacao.png" alt="Simulação" style="width: 48%; height: auto;">
+  <img src="assets/Simulacao-Cambio.png" alt="Simulação com Câmbio" style="width: 48%; height: auto;">
+</div>
 
 <hr>
 
