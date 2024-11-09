@@ -213,10 +213,8 @@ MAIL_PASSWORD=sua_senha
 
 <p>Caso o usuário forneça um email na requisição, um email de confirmação será enviado com os detalhes da simulação. As imagens a seguir ilustram as duas opções possíveis de simulação:</p>
 
-<div style="display: flex; justify-content: space-between;">
-  <img src="assets/Simulacao.png" alt="Simulação" style="width: 48%; height: auto;">
-  <img src="assets/Simulacao-Cambio.png" alt="Simulação com Câmbio" style="width: 48%; height: auto;">
-</div>
+ ![](assets/Simulacao.png) 
+  ![](assets/Simulacao-Cambio.png) 
 
 <hr>
 
