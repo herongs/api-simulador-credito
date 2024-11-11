@@ -48,7 +48,7 @@
 <ul>
   <li><strong>PHP 8+</strong></li>
   <li><strong>Composer</strong></li>
-  <li><strong>MySQL</strong></li>
+  <li><strong>PostgreSQL</strong></li>
 </ul>
 
 <h3>Como configurar o projeto</h3>
@@ -59,8 +59,8 @@
   
   <li>Copie o arquivo <code>.env.example</code> para <code>.env</code> e configure as variáveis de ambiente:</li>
   <pre><code>
-DB_HOST=127.0.0.1
-DB_PORT=3306
+DB_HOST=localhost
+DB_PORT=5432
 DB_DATABASE=nome_do_banco
 DB_USERNAME=seu_usuario
 DB_PASSWORD=sua_senha
