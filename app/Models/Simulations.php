@@ -20,5 +20,6 @@ class Simulations extends Model
         'total_interest',
         'total_payment',
         'currency',
+        'email',
     ];
 }

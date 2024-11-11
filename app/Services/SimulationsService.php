@@ -22,7 +22,7 @@ class SimulationsService extends Controller
         protected AgeGroupsRepositoryInterface $ageGroupRepository,
         protected InterestRatesService $InterestRatesService,
         protected InterestRatesRepositoryInterface $interestRateRepository,
-        protected ExchangeRatesService $ExchangeRatesService,
+        protected ExchangeRatesService $ExchangeRatesService
 
     ) {}
 
@@ -49,6 +49,7 @@ class SimulationsService extends Controller
                 monthly_payment: $monthlyPayment,
                 total_interest: $totalPayment - $dto->loan_amount,
                 currency: 'BRL',
+                email: $dto->email ?? null,
             )
         );
 
@@ -88,6 +89,7 @@ class SimulationsService extends Controller
                 monthly_payment: $monthlyPayment,
                 total_interest: $totalPayment - $totalAmount,
                 currency: $dto->target_currency,
+                email: $dto->email ?? null,
             )
         );
 

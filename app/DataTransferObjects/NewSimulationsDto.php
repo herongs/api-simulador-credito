@@ -18,6 +18,7 @@ class NewSimulationsDto
         public float $monthly_payment,
         public float $total_interest,
         public ?string $currency,
+        public ?string $email,
     ) {
     }
 
@@ -34,6 +35,7 @@ class NewSimulationsDto
             monthly_payment: $request->input('monthly_payment'),
             total_interest: $request->input('total_interest'),
             currency: $request->input('currency') ?? 'BRL',
+            email: $request->input('email') ?? null,
         );
     }
 
@@ -52,6 +54,7 @@ class NewSimulationsDto
             'monthly_payment' => $this->monthly_payment,
             'total_interest' => $this->total_interest,
             'currency' => $this->currency,
+            'email' => $this->email,
         ], fn($value) => !is_null($value));
     }
 }
