@@ -39,7 +39,7 @@
 
 <hr>
 
-<h2>🚀 Vamos Começar</h2>
+<h2>🚀 Instalação</h2>
 
 <h3>Pré-requisitos</h3>
 
@@ -214,7 +214,10 @@ MAIL_PASSWORD=sua_senha
 <p>Caso o usuário forneça um email na requisição, um email de confirmação será enviado com os detalhes da simulação. As imagens a seguir ilustram as duas opções possíveis de simulação:</p>
 
  ![](assets/Simulacao.png) 
-  ![](assets/Simulacao-Cambio.png) 
+[](assets/Simulacao-Cambio.png) 
+
+<img src="assets/Simulacao-Cambio.png" alt="Texto Alternativo">
+<img src="assets/Simulacao.png" alt="Texto Alternativo">
 
 <hr>
 
