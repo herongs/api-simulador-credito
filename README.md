@@ -6,7 +6,7 @@
 
 <h2>📐 Estrutura do Projeto e Arquitetura</h2>
 
-<p>Este projeto segue os princípios <strong>SOLID</strong> e organiza o código em camadas bem definidas para facilitar a manutenção e escalabilidade. Abaixo, temos os principais componentes:</p>
+<p>Este projeto segue os princípios da Clean Architecture com a arquitetura inspirada nos princípios de design do  Domain-Driven Design (DDD) e organiza o código em camadas bem definidas para refletir a lógica de negócios central e facilitar a manutenção e escalabilidade. Além disso, a Clean Architecture favorece o uso de Interfaces e Injeção de Dependência, tornando o projeto mais modular e independente de implementações específicas. Abaixo estão os principais componentes:</p>
 
 <ul>
   <li><strong>Controller</strong>: Recebe as requisições HTTP e delega as operações necessárias para os <strong>services</strong>.</li>
@@ -21,10 +21,10 @@
 <p>Essa estrutura proporciona uma série de vantagens, como:</p>
 
 <ul>
-  <li><strong>Facilidade de manutenção</strong>: Com responsabilidades bem definidas, é simples corrigir problemas sem afetar outras partes do sistema.</li>
-  <li><strong>Escalabilidade</strong>: Permite adicionar ou modificar funcionalidades de forma independente.</li>
-  <li><strong>Modularidade</strong>: Promove a reutilização de código e facilita a implementação de testes unitários isolados.</li>
-  <li><strong>Segurança e Consistência</strong>: Uso de DTO, Request e Response para garantir a validação e estruturação adequadas dos dados.</li>
+  <li><strong>Manutenção</strong>: Responsabilidades bem definidas facilitam identificar e corrigir problemas sem impactar o restante do sistema.</li>
+  <li><strong>Escalabilidade</strong>: Escalabilidade: A divisão em camadas permite a adição e modificação de funcionalidades de forma independente.</li>
+  <li><strong>Modularidade</strong>: Código reutilizável e facilmente testável.</li>
+  <li><strong>Segurança e Consistência</strong>: DTOs, Requests e Responses garantem validação e estruturação adequadas dos dados em cada camada.</li>
 </ul>
 
 <hr>
