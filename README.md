@@ -14,7 +14,7 @@
   <li><strong>Repository</strong>: Gerencia a comunicação com o banco de dados, encapsulando consultas e operações de persistência.</li>
   <li><strong>DTO (Data Transfer Object)</strong>: Usado para transferir dados de forma estruturada entre as camadas.</li>
   <li><strong>Request</strong>: Define regras de validação para garantir que apenas dados válidos sejam processados pelos <strong>services</strong>.</li>
-  <li><strong>Response</strong>: Formata as respostas de forma consistente antes de enviá-las ao cliente.</li>
+  <li><strong>Resource</strong>: Formata as respostas de forma consistente antes de enviá-las ao cliente.</li>
   <li><strong>Collection</strong>: Facilita a manipulação e formatação de coleções de dados que precisam ser retornadas em listas ou agrupamentos específicos.</li>
 </ul>
 
@@ -46,7 +46,7 @@
 <p>Certifique-se de ter as seguintes ferramentas instaladas:</p>
 
 <ul>
-  <li><strong>PHP 8+</strong></li>
+  <li><strong>PHP 8.2+</strong></li>
   <li><strong>Composer</strong></li>
   <li><strong>PostgreSQL</strong></li>
 </ul>
