@@ -174,6 +174,26 @@ MAIL_PASSWORD=sua_senha
 }
 </code></pre>
 
+<h4>Exemplo de requisição com Email:</h4>
+<pre><code>
+{
+  "loan_amount": 5000,
+  "payment_date": 24,
+  "birth_date": "1980-01-01",
+  "target_currency": "USD",
+  "email": "teste@email.com"
+}
+</code></pre>
+
+<h4>Resposta:</h4>
+<pre><code>
+{
+  "total_payment": 889.26,
+  "monthly_payment": 31.05,
+  "total_interest": 18.26
+}
+</code></pre>
+
 <hr>
 
 <h2>📑 Documentação de Cálculo</h2>
